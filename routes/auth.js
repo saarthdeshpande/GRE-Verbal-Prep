@@ -19,7 +19,8 @@ router.get('/google/callback',
         try {
             req.session.user = req.user
             const image = req.session.user.picture
-            res.render('addWord', {image});
+            // res.render('addWord', {image});
+            res.redirect('/')
         } catch(e) {
             console.log(e)
         }
