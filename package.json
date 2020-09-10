@@ -1,7 +1,9 @@
 {
   "name": "gre",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "author": "Saarth Deshpande (https://linkedin.com/in/saarthdeshpande)",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "env-cmd -f ./config/dev.env nodemon ./bin/www"
