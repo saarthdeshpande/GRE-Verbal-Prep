@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/login.css">
+
+</head>
+<header style="border-radius: 0 0 0 0;" class="jumbotron">
+    <div class="container">
+        <div class="row row-header">
+            <div class="col header-texth">
+                <h1 align="center">GRE Words Revision<sup>(&beta;)</sup></h1>
+                <div class="col header-textp">
+                    <p align="center">Created by: <a href="https://www.linkedin.com/in/saarthdeshpande/">Saarth Deshpande</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <a class="navbar-brand" style="color: darkblue;"><img src="/images/study.png" width="40" height="40"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"/>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <li><a class="nav-item nav-link" id="about" href="/about">Home</a></li>
+            <li><a class="nav-item nav-link" id="contact" href="/contactMe">Contact Me</a></li>
+            <form onsubmit="activeAdjust()" id="donateForm" action="/donate" method="post">
+                <li><input class="nav-item nav-link" style="border: none;outline:none;background-color: #ffc009" id="donate"  type="submit" value="Donate"></li>
+            </form>
+        </div>
+        <div class="navbar" style="margin-right: 0;margin-left: auto;">
+            <button onclick="window.location.href='/auth/google'" class="loginBtn loginBtn--google">
+                <a style="color: white;" href="/auth/google">Sign In with Google</a>
+            </button>
+        </div>
+    </div>
+</nav>
+<body class="d-flex flex-column min-vh-100">
+{{{body}}}
+<footer class="footer mt-auto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <p>Source Code: <a href="https://github.com/saarthdeshpande/GRE-Verbal-Prep">GitHub</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+<script>
+    function activeAdjust() {
+        document.getElementById('donate').classList.add('active')
+        document.getElementById('donate').disabled = true
+        document.getElementById('donate').value += '   (Loading...)'
+        document.getElementById('contact').classList.remove('active')
+        document.getElementById('about').classList.remove('active')
+    }
+
+</script>
+
+</html>

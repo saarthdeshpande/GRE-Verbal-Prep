@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="/stylesheets/contactMe.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+
+        <form role="form" onsubmit="submitSuccess(event)" method="post" action="/contactMe" id="contact-form" class="contact-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" autocomplete="off" id="Name" placeholder="Name" size="50">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" autocomplete="off" id="email" placeholder="E-mail" size="50">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="form-control textarea" rows="3" name="message" id="Message" placeholder="Message"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn main-btn pull-right">Send a message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('contact').classList.add('active')
+    const name = document.getElementById('Name').value
+    const email = document.getElementById('email').value
+    const message = document.getElementById('Message').value
+
+    function submitSuccess(e) {
+        e.preventDefault()
+        swal("Mail Sent!",{
+            type: "success"
+        });
+        setTimeout(() => {
+            document.getElementById('contact-form').submit()
+        },2000)
+    }
+
+    $('#contact-form').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            Name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required and cannot be empty'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
+            },
+            Message: {
+                validators: {
+                    notEmpty: {
+                        message: 'The message is required and cannot be empty'
+                    }
+                }
+            }
+        }
+    });
+</script>

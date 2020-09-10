@@ -1,0 +1,70 @@
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web&subset=latin,latin-ext);
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.h1 {
+  text-align: center;
+}
+
+.buttonClass {
+  text-align: center;
+  align-content: center;
+}
+.containerId {
+  text-align: center;
+  align-content: center;
+  alignment: center;
+}
+
+.jumbotron {
+  padding: 20px 20px 20px 20px;
+  margin: 0px auto;
+  background: black;
+  color: floralwhite;
+}
+
+input {
+  text-align: center;
+}
+
+.newWordFooter {
+  text-align: center;
+}
+
+header {
+  width: 100%;
+}
+.swal-footer {
+  text-align: center;
+}
+
+
+
+a {
+  color: #00B7FF;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #dedede;
+  margin: 0px auto;
+  padding: 20px 0px 5px 0px;
+}
+
+footer {
+  align: center;
+}
+
+table th {
+  text-align: center;
+}
+.table {
+  margin: auto;
+  width: 50% !important;
+}
+

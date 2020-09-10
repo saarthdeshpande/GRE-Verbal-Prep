@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<br>
+<br>
+<h1 class="h1">Words Learnt</h1>
+<br>
+<br>
+
+<div style="text-align: center;">
+    <form id="searchForm" action="/allWords" method="post">
+    &nbsp;&nbsp;<label>Query: </label>&nbsp;<input type="text" id="searchWord" name="word">
+        <input onclick="validateEmpty(event)" type="submit" value="Search" id="search">
+    </form>
+    <br>
+    <form action="/allWords">
+        <input type="submit" value="Show All">
+    </form>
+</div>
+<br>
+<br>
+
+<table align="center" id="wordTable" class="table table-striped text-center" style="text-align: center;">
+    <thead>
+    <tr>
+        <th scope="col">Word</th>
+        <th scope="col">Meaning</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#each words as |word i|}}
+            <tr id="{{i}}">
+                <td id="word_{{i}}">{{word.word}}</td>
+                <td id="meaning_{{i}}">{{word.meaning}}</td>
+                <td>
+<!--                    <button style="border: none;outline: none;background-color: transparent;" class="edit" title="Edit" data-toggle="tooltip" onclick="editEntry({{i}})"><i class="material-icons">&#xE254;</i></button>-->
+                    <button style="border: none;outline: none;background-color: transparent;" class="delete" title="Delete" data-toggle="tooltip" onclick="deleteEntry({{i}})"><i class="material-icons">&#xE872;</i></button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<script>
+    document.getElementById('directory').classList.add('active')
+
+    function deleteEntry(index) {
+        const wordToDelete = document.getElementById(`word_${index}`).innerText
+        console.log(wordToDelete)
+        swal("Confirm Delete?", {
+            type: "warning",
+            buttons: ["No", "Yes"],
+            reverseButtons: true,
+            showCancelButton: true,
+            showConfirmButton: true
+        }).then(success => {
+            if(success) {
+                $.post('/deleteWord',{word: wordToDelete})
+                document.getElementById(`${index}`).parentNode.removeChild(document.getElementById(`${index}`));
+
+                swal("Word deleted!", {
+                    type: "success"
+                })
+            }
+        })
+    }
+
+    function validateEmpty(e) {
+        e.preventDefault()
+        if(document.getElementById('searchWord').value.trim() != '') {
+            document.getElementById('searchForm').submit()
+        }
+    }
+
+</script>

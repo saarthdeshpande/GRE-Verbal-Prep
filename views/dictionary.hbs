@@ -1,0 +1,44 @@
+<br>
+<br>
+<br>
+<div id="inputDIV" style="text-align: center;">
+        &nbsp;&nbsp;<label><b>Word to Define: </b></label>&nbsp;<input id="word" type="text" name="word">
+        <input type="submit" onclick="showDefinition()" value="Search" id="defineWord">
+</div>
+<br>
+<div id="definition" style="text-align: center;">
+
+</div>
+<script>
+    document.getElementById('dictionary').classList.add('active')
+
+    document.getElementById('word').addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            document.getElementById('defineWord').click()
+        }
+    })
+    async function showDefinition() {
+        while(document.getElementById('definition').firstChild) {
+            document.getElementById('definition').firstChild.remove()
+        }
+
+        var node = document.createElement("H1");
+        var textnode = document.createTextNode(`Loading...`);
+        node.appendChild(textnode);
+        document.getElementById("definition").appendChild(node);
+
+        const wordToSearch = document.getElementById('word').value;
+        const url ='/getDefinition'
+        const word = await fetch(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({word: wordToSearch})
+        }).then(response => response.json()).then(contents => this.word = JSON.parse(contents.word)).catch((e) => this.word = {meaning: 'Please enter a valid word.'})
+        document.getElementById('definition').innerHTML = `Definition: ${word.meaning}`
+    }
+
+</script>
+

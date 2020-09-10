@@ -1,0 +1,60 @@
+<br>
+<br>
+<h1 class="h1">Learnt a new word yet?</h1>
+<div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <form id='newWordForm' method="POST" action="/newWord" class="newWordFooter">
+        <input type="text" name="newWord" id="newWord" placeholder="New Word">
+        <input type="text" name="wordMeaning" id="wordMeaning" placeholder="Meaning" size="50">
+        <button type="submit" onclick="verifyFromUser(event)">Add New Word</button>
+
+    </form>
+</div>
+<br>
+<br>
+
+<div style="text-align: center;">
+    <button type="submit" onclick="getNewWord()">Fetch a New Word</button>
+</div>
+<script>
+    document.getElementById('learn').classList.add('active')
+
+    function verifyFromUser(e) {
+        e.preventDefault();
+        const newWord = document.getElementById('newWord').value
+        const meaning = document.getElementById('wordMeaning').value
+        if (newWord && meaning && newWord.trim() != '') {
+            swal("Confirm?", `Word: ${newWord}\nMeaning: ${meaning}`, {
+                type: "warning",
+                buttons: ["No", "Yes"],
+                reverseButtons: true,
+                showCancelButton: true,
+                showConfirmButton: true
+            }).then((success) => {
+                if (success) {
+                    swal("Word added!", {
+                        type: "success"
+                    })
+                    setTimeout(() => {
+                        document.getElementById('newWordForm').submit()
+                    }, 1000);
+                }
+            })
+        }
+
+    }
+
+    async function getNewWord() {
+        const url = '/getNewWord'
+        const word = await fetch(url).then((obj) => obj.json()).then(word => this.word = word).catch((e) => console.log(e))
+        console.log(word)
+        document.getElementById('newWord').value = word.word
+        document.getElementById('newWord').value = word.word
+        document.getElementById('wordMeaning').value = word.meaning
+
+    }
+</script>

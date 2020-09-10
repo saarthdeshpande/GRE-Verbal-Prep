@@ -1,0 +1,54 @@
+
+<br>
+<br>
+<h1 class="h1" id="wordHeading">Word: {{ word }}</h1>
+<br>
+<br>
+<div class="h1" id="meaning">
+
+
+</div>
+<br>
+<div class="buttonClass" id="buttonDiv">
+
+    <div class="buttonClass" id="buttonDiv2">
+        <button id="submitButton" onclick="showMeaning()" type="submit" >Check Meaning</button>&nbsp;
+        <button id="submitButton2" onclick="shuffleWords()" type="submit" >Another Word</button>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('reviseActive').classList.add('active')
+    var meaning = `{{meaning}}`;
+    function showMeaning() {
+        swal("Sure?", "Try thinking if you can't remember it.", {
+            type: "warning",
+            buttons: ["No", "Yes"],
+            reverseButtons: true,
+            showCancelButton: true,
+            showConfirmButton: true
+        }).then((success) => {
+            if (success) {
+                var node = document.createElement("H1");
+                var textnode = document.createTextNode(`Meaning: ${this.meaning}`);
+                node.appendChild(textnode);
+                document.getElementById("meaning").appendChild(node);
+                document.getElementById('submitButton').disabled = true;
+            }
+        })
+    }
+
+    async function shuffleWords() {
+        while(document.getElementById('meaning').firstChild) {
+            document.getElementById('meaning').firstChild.remove()
+        }
+
+        document.getElementById('submitButton').disabled = false;
+        const url = '/getRandomWord'
+        let word= await fetch(url).then(response => response.json()).then(contents => this.word = contents).catch(e => console.log(e))
+        document.getElementById('wordHeading').innerHTML = `Word: ${word.word}`
+        this.meaning = word.meaning
+    }
+</script>
+
