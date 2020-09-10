@@ -40,8 +40,21 @@ header {
 .swal-footer {
   text-align: center;
 }
+.carousel,
+.item,
+.active {
+  height: 100%;
+  margin-bottom: 0px;
+}
 
-
+@media (max-width: 601px) {
+  .carousel-item h2 {
+    font-size: 30px;
+  }
+  .carousel-item p {
+    font-size: 18px;
+  }
+}
 
 a {
   color: #00B7FF;
