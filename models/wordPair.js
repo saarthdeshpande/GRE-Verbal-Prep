@@ -12,6 +12,9 @@ const wordPairSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    sentenceUse: {
+        type: String
+    },
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'

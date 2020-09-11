@@ -141,7 +141,7 @@ opacity:0.9;
 }
 
 .carousel-item {
-    height: 66vh;
+    height: 80vh;
     min-height: 350px;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -156,3 +156,12 @@ opacity:0.9;
     top: 50%;
 }
 
+
+
+@media (max-width:991px) {
+    .customAdjust {
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+    }
+}

@@ -62,7 +62,7 @@ router.post('/getDefinition', isLoggedIn, async function (req, res, next) {
     while(meaning.includes(':')) {
       meaning = meaning.replace(':', '')
     }
-    res.send({word: JSON.stringify({word: req.body.word, meaning})})
+    return res.send({word: JSON.stringify({word: req.body.word, meaning})})
   } catch(e) {
     console.log(e)
     res.render('dictionary', null)
@@ -80,9 +80,14 @@ router.get('/newWord', isLoggedIn, async function(req, res, next) {
 
 router.post('/newWord', isLoggedIn, async function(req, res, next) {
   try {
+    let word;
     if(req.body.newWord && req.body.wordMeaning) {
       const user = req.session.user._id
-      const word = new Word({ word: req.body.newWord, meaning: req.body.wordMeaning, user })
+      if (req.body.sentenceUse) {
+        word = new Word({ word: req.body.newWord, meaning: req.body.wordMeaning, sentenceUse: req.body.sentenceUse, user })
+      } else {
+        word = new Word({ word: req.body.newWord, meaning: req.body.wordMeaning, sentenceUse: '-', user })
+      }
       await word.save()
     }
     res.redirect('/allWords')
@@ -97,9 +102,9 @@ router.get('/getRandomWord', isLoggedIn, async function (req, res, next) {
   try {
     const count = await Word.countDocuments({user: req.session.user._id}).then((count) => this.count = count);
     if (count !== 0) {
-      let {word, meaning} = await Word.findOne({user: req.session.user._id}).skip(Math.random() * count)
+      let {word, meaning, sentenceUse } = await Word.findOne({user: req.session.user._id}).skip(Math.random() * count)
       word = word.charAt(0).toUpperCase() + word.slice(1)
-      res.send(JSON.stringify({ word, meaning }))
+      return res.send(JSON.stringify({ word, meaning, sentenceUse }))
     } else {
       return null;
     }
@@ -113,9 +118,9 @@ router.get('/', isLoggedIn, async function(req, res, next) {
   try{
     const count = await Word.countDocuments({user: req.session.user._id}).then((count) => this.count = count);
     if (count !== 0) {
-      let {word, meaning} = await Word.findOne({user: req.session.user._id}).skip(Math.random() * count)
+      let {word, meaning, sentenceUse } = await Word.findOne({user: req.session.user._id}).skip(Math.random() * count)
       word = word.charAt(0).toUpperCase() + word.slice(1)
-      res.render('index', { word, meaning, image: req.session.user.picture })
+      res.render('index', { word, meaning, sentenceUse, image: req.session.user.picture })
     } else {
       res.render('addWord', {image: req.session.user.picture})
     }
@@ -130,7 +135,7 @@ router.get('/getNewWord', isLoggedIn, function (req, res, next) {
     let rawData = fs.readFileSync('./wordMaster.json');
     rawData = JSON.parse(rawData)
     const singleEntry = rawData.words[Math.floor(Math.random() * rawData.words.length)]
-    res.send(JSON.stringify(singleEntry))
+    return res.send(JSON.stringify(singleEntry))
   } catch (e) {
     console.log(e)
     res.redirect('/')

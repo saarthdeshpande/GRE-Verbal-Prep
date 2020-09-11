@@ -23,6 +23,7 @@
     <tr>
         <th scope="col">Word</th>
         <th scope="col">Meaning</th>
+        <th scope="col">Use in a Sentence</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -31,6 +32,7 @@
             <tr id="{{i}}">
                 <td id="word_{{i}}">{{word.word}}</td>
                 <td id="meaning_{{i}}">{{word.meaning}}</td>
+                <td id="sentence_{{i}}">{{word.sentenceUse}}</td>
                 <td>
 <!--                    <button style="border: none;outline: none;background-color: transparent;" class="edit" title="Edit" data-toggle="tooltip" onclick="editEntry({{i}})"><i class="material-icons">&#xE254;</i></button>-->
                     <button style="border: none;outline: none;background-color: transparent;" class="delete" title="Delete" data-toggle="tooltip" onclick="deleteEntry({{i}})"><i class="material-icons">&#xE872;</i></button>

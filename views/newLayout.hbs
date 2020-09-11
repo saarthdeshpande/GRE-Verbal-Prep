@@ -28,21 +28,24 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <a class="navbar-brand" style="color: darkblue;"><img src="/images/study.png" width="40" height="40"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"/>
+        <span class="navbar-center navbar-toggler-icon glyphicon glyphicon glyphicon-menu-hamburger"/>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <li><a class="nav-item nav-link" id="about" href="/about">Home</a></li>
             <li><a class="nav-item nav-link" id="contact" href="/contactMe">Contact Me</a></li>
-            <form onsubmit="activeAdjust()" id="donateForm" action="/donate" method="post">
-                <li><input class="nav-item nav-link" style="border: none;outline:none;background-color: #ffc009" id="donate"  type="submit" value="Donate"></li>
-            </form>
+            <li><form onsubmit="activeAdjust()" id="donateForm" action="/donate" method="post">
+                <input class="nav-item nav-link" style="border: none;outline:none;background-color: #ffc009" id="donate"  type="submit" value="Donate">
+            </form></li>
         </div>
-        <div class="navbar" style="margin-right: 0;margin-left: auto;">
-            <button onclick="window.location.href='/auth/google'" class="loginBtn loginBtn--google">
+    </div>
+    <div class="navbar navbar-center customAdjust">
+        <ul class=" navbar-center still_on_view nav navbar-nav topnav-centered">
+            <li><button onclick="window.location.href='/auth/google'" class="loginBtn loginBtn--google">
                 <a style="color: white;" href="/auth/google">Sign In with Google</a>
-            </button>
-        </div>
+            </button></li>
+        </ul>
     </div>
 </nav>
 <body class="d-flex flex-column min-vh-100">

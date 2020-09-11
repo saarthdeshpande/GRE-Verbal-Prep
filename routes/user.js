@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { isLoggedOut } = require('../middleware/auth')
+const { isLoggedOut, isLoggedIn } = require('../middleware/auth')
 require('../src/sendgrid')
 const sgMail = require('@sendgrid/mail');
 
@@ -9,6 +9,7 @@ router.get('/about', isLoggedOut, function (req, res, next) {
     res.render('about', {layout: 'newLayout.hbs'})
   } catch(e) {
     console.log(e)
+    res.redirect('/')
   }
 })
 
@@ -26,12 +27,21 @@ router.get('/contactMe', function (req, res, next) {
   }
 })
 
+router.get('/help', isLoggedIn, function (req, res, next) {
+  try {
+    res.render('help', {image: req.session.user.picture})
+  } catch(e) {
+    console.log(e)
+    res.redirect('/')
+  }
+})
+
 router.post('/contactMe', function (req, res, next) {
   try {
     console.log(req.body)
     const msg = {
-      to: process.env.SENDER_EMAIL,
-      from: process.env.RECEIVER_EMAIL, // Use the email address or domain you verified above
+      to: process.env.RECEIVER_EMAIL,
+      from: process.env.SENDER_EMAIL, // Use the email address or domain you verified above
       subject: `GRE Verbal Prep - Mail from ${req.body.name}`,
       text: `Name: ${req.body.name}\nE-Mail ID: ${req.body.email}\n\nMessage:\n\n` + req.body.message
     }

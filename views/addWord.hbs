@@ -10,6 +10,7 @@
     <form id='newWordForm' method="POST" action="/newWord" class="newWordFooter">
         <input type="text" name="newWord" id="newWord" placeholder="New Word">
         <input type="text" name="wordMeaning" id="wordMeaning" placeholder="Meaning" size="50">
+        <input type="text" name="sentenceUse" id="sentenceUse" placeholder="Use in a Sentence" size="60">
         <button type="submit" onclick="verifyFromUser(event)">Add New Word</button>
 
     </form>
@@ -27,8 +28,9 @@
         e.preventDefault();
         const newWord = document.getElementById('newWord').value
         const meaning = document.getElementById('wordMeaning').value
+        const sentenceUse = document.getElementById('sentenceUse').value
         if (newWord && meaning && newWord.trim() != '') {
-            swal("Confirm?", `Word: ${newWord}\nMeaning: ${meaning}`, {
+            swal("Confirm?", `Word: ${newWord}\nMeaning: ${meaning}\nSentence: ${sentenceUse}`, {
                 type: "warning",
                 buttons: ["No", "Yes"],
                 reverseButtons: true,

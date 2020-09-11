@@ -13,6 +13,7 @@
 
     <div class="buttonClass" id="buttonDiv2">
         <button id="submitButton" onclick="showMeaning()" type="submit" >Check Meaning</button>&nbsp;
+        <button id="submitButton3" onclick="showSentence()" type="submit" >Use in a Sentence</button>&nbsp;
         <button id="submitButton2" onclick="shuffleWords()" type="submit" >Another Word</button>
     </div>
 </div>
@@ -21,6 +22,14 @@
 <script>
     document.getElementById('reviseActive').classList.add('active')
     var meaning = `{{meaning}}`;
+    var sentenceUse =`{{sentenceUse}}`
+    function showSentence() {
+        var node = document.createElement("H1");
+        var textnode = document.createTextNode(`Sentence Use: ${this.sentenceUse}`);
+        node.appendChild(textnode);
+        document.getElementById("meaning").appendChild(node);
+        document.getElementById('submitButton3').disabled = true;
+    }
     function showMeaning() {
         swal("Sure?", "Try thinking if you can't remember it.", {
             type: "warning",
@@ -45,10 +54,13 @@
         }
 
         document.getElementById('submitButton').disabled = false;
+        document.getElementById('submitButton3').disabled = false;
+
         const url = '/getRandomWord'
         let word= await fetch(url).then(response => response.json()).then(contents => this.word = contents).catch(e => console.log(e))
         document.getElementById('wordHeading').innerHTML = `Word: ${word.word}`
         this.meaning = word.meaning
+        this.sentenceUse = word.sentenceUse
     }
 </script>
 
