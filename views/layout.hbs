@@ -39,7 +39,7 @@
               <li><a class="nav-item nav-link" id="help" href="/help">Help</a></li>
               <li><a class="nav-item nav-link" id="contact" href="/contactMe">Contact Me</a></li>
               <li><form onsubmit="activeAdjust()" action="/donate" method="post">
-                  <input class="nav-item nav-link" style="text-align: left;border: none;outline:none;background-color: #ffc009" type="submit" id="donate" value="Donate">
+                  <input class="nav-item nav-link" style="text-align: left;border: none;outline:none;background-color: #ffc009" type="submit" id="donate" value="Donate (Under maintenance...)">
               </form></li>
 
           </div>
@@ -71,10 +71,11 @@
     </footer>
   </body>
   <script>
+      document.getElementById('donate').disabled = true
       function activeAdjust() {
           document.getElementById('donate').classList.add('active')
           document.getElementById('donate').disabled = true
-          document.getElementById('donate').value += '   (Loading...)'
+          document.getElementById('donate').value += '   (Under maintenance...)'
           document.getElementById('reviseActive').classList.remove('active')
           document.getElementById('dictionary').classList.remove('active')
           document.getElementById('contact').classList.remove('active')
