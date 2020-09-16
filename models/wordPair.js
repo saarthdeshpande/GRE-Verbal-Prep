@@ -20,8 +20,6 @@ const wordPairSchema = new mongoose.Schema({
     }
 })
 
-wordPairSchema.plugin(uniqueValidator);
-
 const Word = mongoose.model('Word', wordPairSchema)
 
 module.exports = Word
