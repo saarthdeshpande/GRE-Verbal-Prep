@@ -5,8 +5,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const wordPairSchema = new mongoose.Schema({
     word: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     meaning: {
         type: String,
