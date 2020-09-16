@@ -83,8 +83,8 @@ router.post('/newWord', isLoggedIn, async function(req, res, next) {
     let word;
     if(req.body.newWord && req.body.wordMeaning) {
       const user = req.session.user._id
-      let word = await Word.find({word: req.body.newWord, user}).then((words) => this.words = words)
-      if (word) {
+      const wordCheck = await Word.findOne({word: req.body.newWord, user}).then((words) => this.words = words)
+      if (wordCheck) {
         res.redirect('/allWords')
       }
       if (req.body.sentenceUse) {
