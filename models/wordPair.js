@@ -20,6 +20,8 @@ const wordPairSchema = new mongoose.Schema({
     }
 })
 
+wordPairSchema.index({'word': 1, 'user': 1}, {unique: true});
+
 const Word = mongoose.model('Word', wordPairSchema)
 
 module.exports = Word
