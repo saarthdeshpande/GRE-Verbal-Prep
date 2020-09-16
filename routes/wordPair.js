@@ -84,6 +84,7 @@ router.post('/newWord', isLoggedIn, async function(req, res, next) {
     if(req.body.newWord && req.body.wordMeaning) {
       const user = req.session.user._id
       const wordCheck = await Word.findOne({word: req.body.newWord, user}).then((words) => this.words = words)
+      print(wordCheck)
       if (wordCheck) {
         res.redirect('/allWords')
       }
